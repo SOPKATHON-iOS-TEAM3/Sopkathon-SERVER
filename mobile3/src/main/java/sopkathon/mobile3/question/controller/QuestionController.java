@@ -1,5 +1,6 @@
 package sopkathon.mobile3.question.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,7 @@ public class QuestionController {
 
     private final QuestionService questionService;
 
+    @Operation(summary = "질문 생성", description = "주어진 퀴즈에 대한 새로운 질문을 생성합니다.")
     @PostMapping("/question")
     public ResponseEntity<SuccessStatusResponse> createQuestion(@RequestBody QuestionCreateRequest questionCreateRequest) {
         return ResponseEntity.status(HttpStatus.CREATED)
