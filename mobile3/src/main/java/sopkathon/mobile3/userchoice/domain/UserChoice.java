@@ -1,14 +1,21 @@
 package sopkathon.mobile3.userchoice.domain;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import sopkathon.mobile3.answer.domain.Answer;
 import sopkathon.mobile3.member.domain.Member;
 import sopkathon.mobile3.question.domain.Question;
 
+@Entity
+@Getter
+@NoArgsConstructor(access= AccessLevel.PROTECTED)
 public class UserChoice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
