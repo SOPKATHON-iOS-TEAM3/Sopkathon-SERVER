@@ -46,9 +46,7 @@ public class QuizService {
         List<Question> questionList = questionRepository.findByQuiz(findQuiz);
         List<Answer> answerList = new ArrayList<>();
         for (Question question : questionList) {
-            answerList.add(answerRepository.findByQuestion(question).orElseThrow(
-                    () -> new NotFoundException(ErrorMessage.ANSWER_NOT_FOUND)
-            ));
+            answerList.addAll(answerRepository.findByQuestion(question));
         }
 
         List<FindQuestionDto> questionDtos = questionList.stream().map(
@@ -60,5 +58,11 @@ public class QuizService {
         ).collect(Collectors.toList());
 
         return new FindQuizResponseDto(questionDtos, answerDtos);
+    }
+
+    public Quiz findById(Long quizId) {
+        return quizRepository.findById(quizId).orElseThrow(
+                () -> new NotFoundException((ErrorMessage.QUIZ_NOT_FOUND))
+        );
     }
 }

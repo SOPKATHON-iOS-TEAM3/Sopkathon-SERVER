@@ -8,9 +8,9 @@ import org.springframework.http.HttpStatus;
 @AllArgsConstructor
 public enum SuccessMessage {
 
-
     MEMBER_CREATE_SUCCESS(HttpStatus.CREATED.value(),"멤버 생성 완료"),
     ANSWER_CREATE_SUCCESS(HttpStatus.CREATED.value(),"답변 생성 완료"),
+    QUESTION_CREATE_SUCCESS(HttpStatus.CREATED.value(), "질문 생성 완료"),
     QUIZ_CREATE_SUCCESS(HttpStatus.CREATED.value(),"퀴즈 생성 완료");
     private final int status;
     private final String message;
