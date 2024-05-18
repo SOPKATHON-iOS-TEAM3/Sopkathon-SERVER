@@ -9,11 +9,12 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import sopkathon.mobile3.shared.BaseTimeEntity;
 
 @Entity
 @Getter
 @NoArgsConstructor(access= AccessLevel.PROTECTED)
-public class Member {
+public class Member extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memberId;
