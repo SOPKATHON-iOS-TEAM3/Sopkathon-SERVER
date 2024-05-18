@@ -1,12 +1,8 @@
 package sopkathon.mobile3.answer.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
@@ -15,7 +11,7 @@ import sopkathon.mobile3.question.domain.Question;
 
 @Entity
 @Getter
-@NoArgsConstructor(access= AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,4 +25,19 @@ public class Answer {
     @JoinColumn(name = "question_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Question question;
+
+    @Builder
+    private Answer(String answerText, boolean isCorrect, Question question) {
+        this.answerText = answerText;
+        this.isCorrect = isCorrect;
+        this.question = question;
+    }
+
+    public static Answer create(String answerText, boolean isCorrect, Question question) {
+        return Answer.builder()
+                .answerText(answerText)
+                .isCorrect(isCorrect)
+                .question(question)
+                .build();
+    }
 }

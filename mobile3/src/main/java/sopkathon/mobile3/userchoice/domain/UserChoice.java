@@ -1,12 +1,8 @@
 package sopkathon.mobile3.userchoice.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import sopkathon.mobile3.answer.domain.Answer;
@@ -15,7 +11,7 @@ import sopkathon.mobile3.question.domain.Question;
 
 @Entity
 @Getter
-@NoArgsConstructor(access= AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class UserChoice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,4 +30,21 @@ public class UserChoice {
     private Answer answer;
 
     private boolean isCorrect;
+
+    @Builder
+    private UserChoice(Member member, Question question, Answer answer, boolean isCorrect) {
+        this.member = member;
+        this.question = question;
+        this.answer = answer;
+        this.isCorrect = isCorrect;
+    }
+
+    public static UserChoice create(Member member, Question question, Answer answer, boolean isCorrect) {
+        return UserChoice.builder()
+                .member(member)
+                .question(question)
+                .answer(answer)
+                .isCorrect(isCorrect)
+                .build();
+    }
 }

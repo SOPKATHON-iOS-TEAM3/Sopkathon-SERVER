@@ -1,13 +1,8 @@
 package sopkathon.mobile3.quiz.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
@@ -16,7 +11,7 @@ import sopkathon.mobile3.member.domain.Member;
 
 @Entity
 @Getter
-@NoArgsConstructor(access= AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Quiz {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,4 +23,17 @@ public class Quiz {
     @JoinColumn(name = "member_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Member member;
+
+    @Builder
+    private Quiz(String inviteCode, Member member) {
+        this.inviteCode = inviteCode;
+        this.member = member;
+    }
+
+    public static Quiz create(String inviteCode, Member member) {
+        return Quiz.builder()
+                .inviteCode(inviteCode)
+                .member(member)
+                .build();
+    }
 }
