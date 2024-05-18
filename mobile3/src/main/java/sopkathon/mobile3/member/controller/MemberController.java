@@ -25,6 +25,6 @@ public class MemberController {
 
     @GetMapping("/main")
     public ResponseEntity<GetMainResponseDto> getMain(@RequestBody GetMainRequestDto requestDto) {
-        return ResponseEntity.ok(memberService.getMain(requestDto));
+        return ResponseEntity.ok(memberService.findMain(requestDto));
     }
 }
