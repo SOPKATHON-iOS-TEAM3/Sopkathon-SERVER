@@ -1,6 +1,5 @@
 package sopkathon.mobile3.member.service;
 
-import com.sun.net.httpserver.Authenticator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,9 +25,15 @@ public class MemberService {
         return SuccessStatusResponse.of(SuccessMessage.MEMBER_CREATE_SUCCESS);
     }
 
-    public GetMainResponseDto getMain(GetMainRequestDto requestDto) {
+    public GetMainResponseDto findMain(GetMainRequestDto requestDto) {
         return GetMainResponseDto.of(memberRepository.findById(requestDto.memberId()).orElseThrow(
                 () -> new NotFoundException(ErrorMessage.MEMBER_NOT_FOUND)
         ));
+    }
+
+    public Member findById(Long memberId) {
+        return memberRepository.findById(memberId).orElseThrow(
+                () -> new NotFoundException((ErrorMessage.MEMBER_NOT_FOUND))
+        );
     }
 }

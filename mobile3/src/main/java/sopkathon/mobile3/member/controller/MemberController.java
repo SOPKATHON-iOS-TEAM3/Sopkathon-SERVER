@@ -18,7 +18,7 @@ public class MemberController {
     private final MemberService memberService;
 
     @PostMapping("/member")
-    @Operation(summary = "닉네임과 타겟 필드로 멤버를 생성하는 API", description = "닉네임과 타겟 필드로 멤버를 생성하는 로직을 처리합니다.")
+    @Operation(summary = "닉네임과 친해지고픈 친구 필드를 이용해 멤버를 생성하는 API", description = "닉네임과 친해지고픈 친구 필드를 이용해 멤버를 생성합니다")
     public ResponseEntity<SuccessStatusResponse> createMember(@RequestBody MemberCreateRequestDto requestDto) {
         return ResponseEntity.ok(memberService.create(requestDto));
     }
@@ -26,6 +26,6 @@ public class MemberController {
     @GetMapping("/main")
     @Operation(summary = "홈 화면에 GET API", description = "친해지고 싶은 친구 수 반환합니다.")
     public ResponseEntity<GetMainResponseDto> getMain(@RequestBody GetMainRequestDto requestDto) {
-        return ResponseEntity.ok(memberService.getMain(requestDto));
+        return ResponseEntity.ok(memberService.findMain(requestDto));
     }
 }
