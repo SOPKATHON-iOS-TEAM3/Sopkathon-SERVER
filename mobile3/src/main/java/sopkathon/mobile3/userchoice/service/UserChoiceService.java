@@ -9,13 +9,13 @@ import sopkathon.mobile3.common.dto.SuccessStatusResponse;
 import sopkathon.mobile3.common.dto.message.ErrorMessage;
 import sopkathon.mobile3.common.dto.message.SuccessMessage;
 import sopkathon.mobile3.exception.NotFoundException;
+import sopkathon.mobile3.member.domain.Member;
 import sopkathon.mobile3.member.repository.MemberRepository;
 import sopkathon.mobile3.member.service.dto.UserChoiceCreateRequestDto;
 import sopkathon.mobile3.question.domain.Question;
 import sopkathon.mobile3.question.repository.QuestionRepository;
 import sopkathon.mobile3.userchoice.domain.UserChoice;
 import sopkathon.mobile3.userchoice.repository.UserChoiceRepository;
-import sopkathon.mobile3.member.domain.Member;
 
 @Service
 @RequiredArgsConstructor
@@ -42,12 +42,20 @@ public class UserChoiceService {
                         () -> new NotFoundException(ErrorMessage.ANSWER_NOT_FOUND)
                 );
 
-        if(findAnswer.isCorrect()) {
-            userChoiceRepository.save(UserChoice.create(findMember, findQuestion, findAnswer, true));
-        } else {
-            userChoiceRepository.save(UserChoice.create(findMember, findQuestion, findAnswer, false));
+        boolean isCorrect = findAnswer.isCorrect();
+        userChoiceRepository.save(UserChoice.create(findMember, findQuestion, findAnswer, isCorrect));
+
+        // 마지막 질문에 대한 답변인지 확인
+        if (isLastQuestion(findQuestion)) {
+            findMember.incrementFriendShipFriend();
+            memberRepository.save(findMember);
         }
 
         return SuccessStatusResponse.of(SuccessMessage.ANSWER_CREATE_SUCCESS);
+    }
+
+    // 마지막 질문인지 확인하는 메서드
+    private boolean isLastQuestion(Question question) {
+        return question.getQuestionId() % 3 == 0; // question_id가 3의 배수인지 확인
     }
 }

@@ -40,4 +40,8 @@ public class Member extends BaseTimeEntity {
         this.nickName = nickName;
         this.targetFriend = targetFriend;
     }
+
+    public void incrementFriendShipFriend() {
+        this.friendShipFriend += 1;
+    }
 }
