@@ -27,6 +27,7 @@ https://soapy-plume-6fb.notion.site/a50b684f61df4a6a8999dcea8bf4d5f2?pvs=4
       - quiz
       - shared
       - userchoice
+      - swagger
       - Mobile3Application
 - resources
   - application.yml
