@@ -24,6 +24,9 @@ public class Member {
     @Column(nullable = false)
     int targetFriend;
 
+    @Column(nullable = false)
+    int friendShipFriend;
+
     public static Member create(String nickName, int targetFriend) {
         return Member.builder()
                 .nickName(nickName)
