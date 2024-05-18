@@ -36,4 +36,8 @@ public class Quiz {
                 .member(member)
                 .build();
     }
+
+    public void setInviteCode(String inviteCode) {
+        this.inviteCode = inviteCode;
+    }
 }

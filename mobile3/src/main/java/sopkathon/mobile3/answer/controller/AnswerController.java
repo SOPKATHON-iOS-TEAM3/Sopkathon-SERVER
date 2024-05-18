@@ -23,8 +23,13 @@ public class AnswerController {
     @Operation(summary = "답변 생성", description = "주어진 질문에 대한 두 개의 답변을 생성합니다.")
     @PostMapping("/answers")
     public ResponseEntity<SuccessStatusResponse> createAnswers(@RequestBody AnswerCreateRequest answerCreateRequest) {
-        answerService.createAnswers(answerCreateRequest);
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(SuccessStatusResponse.of(SuccessMessage.ANSWER_CREATE_SUCCESS));
+        String inviteCode = answerService.createAnswers(answerCreateRequest);
+        if (inviteCode != null) {
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(SuccessStatusResponse.of("모든 질문 완료, 초대코드: " + inviteCode));
+        } else {
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(SuccessStatusResponse.of(SuccessMessage.ANSWER_CREATE_SUCCESS));
+        }
     }
 }
