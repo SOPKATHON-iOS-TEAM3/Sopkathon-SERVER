@@ -30,7 +30,6 @@ public class UserChoice {
     private Answer answer;
 
     private boolean isCorrect;
-
     @Builder
     private UserChoice(Member member, Question question, Answer answer, boolean isCorrect) {
         this.member = member;

@@ -11,4 +11,8 @@ public record SuccessStatusResponse(
         return new SuccessStatusResponse(successMessage.getStatus(), successMessage.getMessage());
     }
 
+    public static SuccessStatusResponse of(String customMessage) {
+        return new SuccessStatusResponse(201, customMessage);
+    }
+
 }
