@@ -28,7 +28,7 @@ public class QuizController {
 
     @GetMapping("/quiz")
     @Operation(summary = "초대코드로 퀴즈 불러오기 API", description = "초대 코드를 바탕으로 퀴즈를 불러옵니다.")
-    public ResponseEntity getQuiz(@RequestBody FindQuizRequestDto requestDto) {
-        return ResponseEntity.ok(quizService.findQuizByInvitationCode(requestDto));
+    public ResponseEntity getQuiz(@RequestParam(name="inviteCode") String inviteCode) {
+        return ResponseEntity.ok(quizService.findQuizByInvitationCode(inviteCode));
     }
 }

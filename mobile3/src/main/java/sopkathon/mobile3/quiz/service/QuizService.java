@@ -38,8 +38,8 @@ public class QuizService {
         return quiz.getQuizId().toString();
     }
 
-    public FindQuizResponseDto findQuizByInvitationCode(FindQuizRequestDto requestDto) {
-        Quiz findQuiz = quizRepository.findQuizByInviteCode(requestDto.inviteCode()).orElseThrow(
+    public FindQuizResponseDto findQuizByInvitationCode(String inviteCode) {
+        Quiz findQuiz = quizRepository.findQuizByInviteCode(inviteCode).orElseThrow(
                 () -> new NotFoundException(ErrorMessage.QUIZ_NOT_FOUND)
         );
 
