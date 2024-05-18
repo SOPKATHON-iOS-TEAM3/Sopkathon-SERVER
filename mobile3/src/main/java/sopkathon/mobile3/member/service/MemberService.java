@@ -25,8 +25,8 @@ public class MemberService {
         return SuccessStatusResponse.of(SuccessMessage.MEMBER_CREATE_SUCCESS);
     }
 
-    public GetMainResponseDto findMain(GetMainRequestDto requestDto) {
-        return GetMainResponseDto.of(memberRepository.findById(requestDto.memberId()).orElseThrow(
+    public GetMainResponseDto findMain(Long memberId) {
+        return GetMainResponseDto.of(memberRepository.findById(memberId).orElseThrow(
                 () -> new NotFoundException(ErrorMessage.MEMBER_NOT_FOUND)
         ));
     }
