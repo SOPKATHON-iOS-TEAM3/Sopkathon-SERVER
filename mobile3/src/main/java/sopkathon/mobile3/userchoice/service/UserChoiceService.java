@@ -14,6 +14,7 @@ import sopkathon.mobile3.member.repository.MemberRepository;
 import sopkathon.mobile3.member.service.dto.UserChoiceCreateRequestDto;
 import sopkathon.mobile3.question.domain.Question;
 import sopkathon.mobile3.question.repository.QuestionRepository;
+import sopkathon.mobile3.quiz.domain.Quiz;
 import sopkathon.mobile3.userchoice.domain.UserChoice;
 import sopkathon.mobile3.userchoice.repository.UserChoiceRepository;
 
@@ -45,10 +46,12 @@ public class UserChoiceService {
         boolean isCorrect = findAnswer.isCorrect();
         userChoiceRepository.save(UserChoice.create(findMember, findQuestion, findAnswer, isCorrect));
 
-        // 마지막 질문에 대한 답변인지 확인
+        // 질문을 낸 유저의 friendship_friend 증가
+        Quiz quiz = findQuestion.getQuiz();
+        Member questionCreator = quiz.getMember();
         if (isLastQuestion(findQuestion)) {
-            findMember.incrementFriendShipFriend();
-            memberRepository.save(findMember);
+            questionCreator.incrementFriendShipFriend();
+            memberRepository.save(questionCreator);
         }
 
         return SuccessStatusResponse.of(SuccessMessage.ANSWER_CREATE_SUCCESS);
