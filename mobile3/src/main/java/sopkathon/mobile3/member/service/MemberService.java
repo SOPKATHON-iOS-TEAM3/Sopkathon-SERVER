@@ -2,6 +2,7 @@ package sopkathon.mobile3.member.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import sopkathon.mobile3.common.dto.SuccessStatusResponse;
 import sopkathon.mobile3.common.dto.message.ErrorMessage;
 import sopkathon.mobile3.common.dto.message.SuccessMessage;
@@ -18,6 +19,7 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
 
+    @Transactional
     public SuccessStatusResponse create(MemberCreateRequestDto requestDto) {
         memberRepository.save(Member.create(requestDto.nickName(), requestDto.targetFriend()));
         return SuccessStatusResponse.of(SuccessMessage.MEMBER_CREATE_SUCCESS);
