@@ -2,8 +2,8 @@ spring:
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/sopkathon
-    username:
-    password:
+    username: seminar_user
+    password: seminar1234
   jpa:
     show-sql: true
     hibernate:
