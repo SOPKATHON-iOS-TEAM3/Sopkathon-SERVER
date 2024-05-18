@@ -24,6 +24,7 @@ public class MemberController {
     }
 
     @GetMapping("/main")
+    @Operation(summary = "홈 화면에 GET API", description = "친해지고 싶은 친구 수 반환합니다.")
     public ResponseEntity<GetMainResponseDto> getMain(@RequestBody GetMainRequestDto requestDto) {
         return ResponseEntity.ok(memberService.getMain(requestDto));
     }
