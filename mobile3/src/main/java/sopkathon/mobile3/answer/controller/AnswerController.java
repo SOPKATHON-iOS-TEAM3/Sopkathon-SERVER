@@ -20,7 +20,7 @@ public class AnswerController {
 
     private final AnswerService answerService;
 
-    @Operation(summary = "답변 생성", description = "주어진 질문에 대한 두 개의 답변을 생성합니다.")
+    @Operation(summary = "답변 생성 및 난수 생성", description = "주어진 질문에 대한 두 개의 답변을 생성하고 총 3개의 질문과 그에 따른 6개의 답변 생성 시 난수를 반환합니다. ")
     @PostMapping("/answers")
     public ResponseEntity<SuccessStatusResponse> createAnswers(@RequestBody AnswerCreateRequest answerCreateRequest) {
         String inviteCode = answerService.createAnswers(answerCreateRequest);
