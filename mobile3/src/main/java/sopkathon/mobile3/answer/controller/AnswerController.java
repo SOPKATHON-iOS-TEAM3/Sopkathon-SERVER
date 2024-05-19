@@ -26,7 +26,7 @@ public class AnswerController {
         String inviteCode = answerService.createAnswers(answerCreateRequest);
         if (inviteCode != null) {
             return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(SuccessStatusResponse.of("모든 질문 완료, 초대코드: " + inviteCode));
+                    .body(SuccessStatusResponse.of(inviteCode));
         } else {
             return ResponseEntity.status(HttpStatus.CREATED)
                     .body(SuccessStatusResponse.of(SuccessMessage.ANSWER_CREATE_SUCCESS));
